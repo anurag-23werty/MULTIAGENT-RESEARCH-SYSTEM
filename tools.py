@@ -7,11 +7,20 @@ from rich import print
 from dotenv import load_dotenv
 
 load_dotenv()
-tavily = TavilyClient(api_key=os.getenv("TAVILY_API_KEY"))
+
+
+def get_tavily_client() -> TavilyClient:
+    api_key = os.getenv("TAVILY_API_KEY")
+    if not api_key:
+        raise ValueError("TAVILY_API_KEY is not set.")
+    return TavilyClient(api_key=api_key)
+
+
 @tool
 def websearch(query:str)->str:
     """Search the web for recent and reliable information on a topic. Returns Tiles,URLs and snippets"""
 
+    tavily = get_tavily_client()
     response = tavily.search(query=query,max_results=5)
 
     out=[]
@@ -33,5 +42,4 @@ def scrape_url(url:str)->str:
         return f"could not scrape url :{str(e)}"
   
         
-
 

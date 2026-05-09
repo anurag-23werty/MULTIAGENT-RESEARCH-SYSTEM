@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ResearchMind</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="hero">
+        <div>
+          <p class="eyebrow">Multi-Agent AI Research System</p>
+          <h1>ResearchMind</h1>
+          <p class="hero-copy">
+            Search, read, write, and critique research with a coordinated AI pipeline.
+          </p>
+        </div>
+        <div class="status-pill" id="apiStatus">
+          <span></span>
+          Checking API
+        </div>
+      </section>
+
+      <section class="workspace">
+        <form class="query-panel" id="researchForm">
+          <label for="topic">Research topic</label>
+          <div class="input-row">
+            <input
+              id="topic"
+              name="topic"
+              type="text"
+              autocomplete="off"
+              placeholder="e.g. AI agents in healthcare"
+              required
+            />
+            <button type="submit" id="runButton">
+              <span>Run</span>
+            </button>
+          </div>
+          <div class="examples" aria-label="Example topics">
+            <button type="button" data-topic="LLM agents in 2026">LLM agents</button>
+            <button type="button" data-topic="CRISPR gene editing progress">CRISPR</button>
+            <button type="button" data-topic="Fusion energy breakthroughs">Fusion energy</button>
+          </div>
+          <p class="message" id="message"></p>
+        </form>
+
+        <aside class="pipeline" aria-label="Pipeline progress">
+          <div class="step" data-step="search">
+            <span>01</span>
+            <div>
+              <strong>Search Agent</strong>
+              <p>Finds recent sources and snippets.</p>
+            </div>
+            <small>Waiting</small>
+          </div>
+          <div class="step" data-step="reader">
+            <span>02</span>
+            <div>
+              <strong>Reader Agent</strong>
+              <p>Scrapes a relevant source for detail.</p>
+            </div>
+            <small>Waiting</small>
+          </div>
+          <div class="step" data-step="writer">
+            <span>03</span>
+            <div>
+              <strong>Writer Chain</strong>
+              <p>Drafts the final research report.</p>
+            </div>
+            <small>Waiting</small>
+          </div>
+          <div class="step" data-step="critic">
+            <span>04</span>
+            <div>
+              <strong>Critic Chain</strong>
+              <p>Scores the report and suggests improvements.</p>
+            </div>
+            <small>Waiting</small>
+          </div>
+        </aside>
+      </section>
+
+      <section class="results" id="results" hidden>
+        <div class="result-toolbar">
+          <div>
+            <p class="eyebrow">Research Output</p>
+            <h2 id="resultTitle">Report</h2>
+          </div>
+          <div class="toolbar-actions">
+            <button type="button" id="copyButton">Copy</button>
+            <button type="button" id="downloadButton">Download</button>
+          </div>
+        </div>
+
+        <div class="tabs" role="tablist" aria-label="Research results">
+          <button type="button" class="tab active" data-panel="report">Report</button>
+          <button type="button" class="tab" data-panel="feedback">Critic</button>
+          <button type="button" class="tab" data-panel="sources">Sources</button>
+          <button type="button" class="tab" data-panel="raw">Raw</button>
+        </div>
+
+        <article class="panel active" id="reportPanel"></article>
+        <article class="panel" id="feedbackPanel"></article>
+        <article class="panel" id="sourcesPanel"></article>
+        <article class="panel" id="rawPanel"></article>
+      </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="/static/app.js"></script>
+  </body>
+</html>
